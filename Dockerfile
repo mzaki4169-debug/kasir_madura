@@ -27,7 +27,11 @@ RUN composer install --no-dev --optimize-autoloader
 RUN npm install
 RUN npm run build
 
-RUN chmod -R 775 storage bootstrap/cache
+# Buat folder yang dibutuhkan Laravel
+RUN mkdir -p storage/framework/views \
+    && mkdir -p storage/framework/cache/data \
+    && mkdir -p storage/framework/sessions \
+    && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8080
 
